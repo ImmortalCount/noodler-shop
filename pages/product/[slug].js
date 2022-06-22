@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import Link from 'next/link';
 import React, {useContext} from 'react'
 import Layout from '../../components/Layout'
@@ -20,8 +20,10 @@ export default function ProductScreen() {
 
         if (product.countInStock < quantity){
             alert('Sorry, the product is out of stock')
+            return
         }
-        dispatch({ type: 'CART_ADD_ITEM', payload: {...product, quantity: 1}})
+        dispatch({ type: 'CART_ADD_ITEM', payload: {...product, quantity}})
+        Router.push('/cart')
     }
   return (
     <Layout title={product.name}>
